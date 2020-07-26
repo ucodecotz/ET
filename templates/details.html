@@ -6,7 +6,7 @@
                    <div class="col-sm-6 col-xl-8 mb-3">
                       <div class="card">
                         <div class="card-header border-bottom flex-column align-items-start p-3">
-                            <h1>Customise your plan</h1>
+                            <h1>Customize and submit your plan</h1>
                           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-box text-secondary h3 stroke-width-1 mb-2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
                           <h4 class="text-secondary font-weight-light mb-2">{{ object.name }}</h4>
                           <p class="font-size-sm mb-0">{{object.description }}</p>
@@ -17,15 +17,23 @@
                             {{ object.sub_price }}
                             <small class="align-self-end">/month</small>
                           </h4>
+                            <form action="{{ object.get_add_to_user_subscription_url }}" method="post">
+                                {%csrf_token %}
+{#                                <tr>#}
+{#                                    <th>#}
+{#                                      <label for="id_sub_duration">Sub duration:</label></th><td><select name="sub_duration" id="id_sub_duration">#}
+{#                                    <option value="">---------</option>#}
+{#                                    <option value="D">Day</option>#}
+{#                                    <option value="W">Week</option>#}
+{#                                    <option value="M" selected>Month</option>#}
+{#                                    <option value="Y">Year</option>#}
+{#                                </select>#}
+{#                                </td>#}
+{#                                </tr>#}
 
-                            <form action="">
 
-                                <select class="form-control form-control-sm">
-                                  <option>Day subscription</option>
-                                  <option>Weekly</option>
-                                  <option>Monthly</option>
-                                </select>
-
+                                {{ update_sub_form.as_table }}
+                                <button class="btn btn-light" type="submit">update now</button>
                             </form>
                         </div>
                         <div class="card-body">
@@ -42,6 +50,7 @@
                         <div class="card-footer justify-content-center p-3">
                               <a href="{{ object.get_add_to_user_subscription_url }}" class="btn btn-outline-secondary">SUBSCRIBE NOW</a>
                         </div>
+
                       </div>
                     </div>
 

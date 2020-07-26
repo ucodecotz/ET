@@ -88,16 +88,12 @@ class SubscriptionPrice(models.Model):
 #  This is main table to handle our service
 class SubscriptionType(models.Model):
     name = models.CharField(max_length=200, null=True, )
+    sub_code = models.CharField(max_length=200, blank=True, null=True)
     # we need to add the user to subscription Group of user after subscription
     user = models.ForeignKey(UserProfile, on_delete=models.CASCADE, null=True)
     description = models.TextField(max_length=200, null=True, blank=True)
-    group = models.ForeignKey(auth.models.Group,
-                              on_delete=models.CASCADE, null=True, blank=False, unique=False)
-    sub_code = models.CharField(max_length=200, blank=True, null=True)
-    # sub_desc = models.TextField(max_length=200, blank=True, default='testing')
     sub_price = models.ForeignKey(SubscriptionPrice, null=True, blank=True, on_delete=models.CASCADE)
-    sub_unit = models.PositiveIntegerField(null=True, blank=True)
-    sub_duration = models.CharField(max_length=200, choices=_TIME_UNIT_CHOICES, default='W', null=True, blank=True)
+    sub_duration = models.CharField(max_length=200, choices=_TIME_UNIT_CHOICES, default='M', null=True, blank=True)
     updated_on = models.DateTimeField(auto_now=True, null=True)
     created_on = models.DateTimeField(auto_now_add=True, null=True)
     #  slug is for making queries without using  "id"
@@ -117,9 +113,13 @@ class SubscriptionType(models.Model):
     def get_add_to_user_subscription_url(self):
         return reverse('core:add_to_user_subscription', kwargs={'slug': self.slug})
 
+    def get_price_before_subscriptions(self):
+        print(int(self.sub_price.sub_price_amount))
+        return int(self.sub_price.sub_price_amount)
+
 
 #  this where all subscription are handled
-class USerSubscriptions(models.Model):
+class UserSubscriptions(models.Model):
     user_id = models.ForeignKey(settings.AUTH_USER_MODEL,
                                 on_delete=models.CASCADE,
                                 null=True, blank=True)
@@ -127,6 +127,11 @@ class USerSubscriptions(models.Model):
                                           on_delete=models.CASCADE,
                                           null=True,
                                           blank=True)
+    after_update_price = models.PositiveIntegerField(null=True, blank=True,)
+
+    after_update_duration = models.CharField(max_length=200, choices=_TIME_UNIT_CHOICES, default='M', null=True,
+                                             blank=True)
+
     start_date = models.DateTimeField(default=datetime.now)
     end_date = models.DateTimeField(blank=True, null=True)
     active = models.BooleanField(default=False, null=True, blank=True)
@@ -138,25 +143,11 @@ class USerSubscriptions(models.Model):
     class Meta:
         verbose_name_plural = 'subscription'
 
-    # TODO: add  a function to  for manging sub_time
+    def get_price_before_subscriptions(self):
+        print(int(self.subscription_type.sub_price.sub_price_amount))
+        return int(self.subscription_type.sub_price.sub_price_amount)
 
-    # def save(self, *args, **kwargs):
-    #     # if self.sub_duration == 'W':
-    #     if self.end_date is None:
-    #
-    #         if self.subscription_type.sub_duration == 'D':
-    #             number_of_days = _sub_unit_days['D']
-    #             self.end_date = self.start_date + timedelta(days=number_of_days)
-    #             super(USerSubscriptions, self).save(*args, **kwargs)
-    #
-    #         elif self.subscription_type.sub_duration == 'W':
-    #             number_of_days = _sub_unit_days['W']
-    #             self.end_date = self.start_date + timedelta(days=number_of_days)
-    #             super(USerSubscriptions, self).save(*args, **kwargs)
-    #         elif self.subscription_type.sub_duration == 'Y':
-    #             number_of_days = _sub_unit_days['Y']
-    #             self.end_date = self.start_date + timedelta(days=number_of_days)
-    #             super(USerSubscriptions, self).save(*args, **kwargs)
+    # TODO: add  a function to  for manging sub_time
 
     def __str__(self):
         return str(f"{self.user_id}'s subscription started on: {self.start_date}  and ends on{self.end_date} ")
@@ -184,7 +175,7 @@ class Invoice(models.Model):
 
     invoice_title = models.CharField(max_length=200, null=True, blank=True)
     unique_code = models.CharField(max_length=200, null=True, blank=True)
-    subscriptions = models.ManyToManyField(USerSubscriptions, blank=True)
+    subscriptions = models.ManyToManyField(UserSubscriptions, blank=True)
     # payments method
     service_provider_id = models.ForeignKey('ServiceProvider', on_delete=models.CASCADE, null=True)
     payment_status = models.BooleanField(null=True, blank=True, default=False)

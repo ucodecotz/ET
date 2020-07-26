@@ -13,7 +13,7 @@ class SubTyeAdmin(admin.ModelAdmin):
 
 admin.site.register(UserProfile)
 admin.site.register(SubscriptionType)
-admin.site.register(USerSubscriptions)
+admin.site.register(UserSubscriptions)
 admin.site.register(Invoice)
 admin.site.register(Payments)
 admin.site.register(Payment_response)
