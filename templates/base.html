@@ -80,6 +80,366 @@
     border: 0 solid rgba(0,0,0,.125);
     border-radius: .25rem;
 }
+    {# Invoce style#}
+
+.receipt-content .logo a:hover {
+  text-decoration: none;
+  color: #7793C4;
+}
+
+.receipt-content .invoice-wrapper {
+  background: #FFF;
+  border: 1px solid #CDD3E2;
+  box-shadow: 0px 0px 1px #CCC;
+  padding: 40px 40px 60px;
+  margin-top: 40px;
+  border-radius: 4px;
+}
+
+.receipt-content .invoice-wrapper .payment-details span {
+  color: #A9B0BB;
+  display: block;
+}
+.receipt-content .invoice-wrapper .payment-details a {
+  display: inline-block;
+  margin-top: 5px;
+}
+
+.receipt-content .invoice-wrapper .line-items .print a {
+  display: inline-block;
+  border: 1px solid #9CB5D6;
+  padding: 13px 13px;
+  border-radius: 5px;
+  color: #708DC0;
+  font-size: 13px;
+  -webkit-transition: all 0.2s linear;
+  -moz-transition: all 0.2s linear;
+  -ms-transition: all 0.2s linear;
+  -o-transition: all 0.2s linear;
+  transition: all 0.2s linear;
+}
+
+.receipt-content .invoice-wrapper .line-items .print a:hover {
+  text-decoration: none;
+  border-color: #333;
+  color: #333;
+}
+
+.receipt-content {
+  background: #ECEEF4;
+}
+@media (min-width: 1200px) {
+  .receipt-content .container {width: 900px; }
+}
+
+.receipt-content .logo {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.receipt-content .logo a {
+  font-family: Myriad Pro, Lato, Helvetica Neue, Arial;
+  font-size: 36px;
+  letter-spacing: .1px;
+  color: #555;
+  font-weight: 300;
+  -webkit-transition: all 0.2s linear;
+  -moz-transition: all 0.2s linear;
+  -ms-transition: all 0.2s linear;
+  -o-transition: all 0.2s linear;
+  transition: all 0.2s linear;
+}
+
+.receipt-content .invoice-wrapper .intro {
+  line-height: 25px;
+  color: #444;
+}
+
+.receipt-content .invoice-wrapper .payment-info {
+  margin-top: 25px;
+  padding-top: 15px;
+}
+
+.receipt-content .invoice-wrapper .payment-info span {
+  color: #A9B0BB;
+}
+
+.receipt-content .invoice-wrapper .payment-info strong {
+  display: block;
+  color: #444;
+  margin-top: 3px;
+}
+
+@media (max-width: 767px) {
+  .receipt-content .invoice-wrapper .payment-info .text-right {
+  text-align: left;
+  margin-top: 20px; }
+}
+.receipt-content .invoice-wrapper .payment-details {
+  border-top: 2px solid #EBECEE;
+  margin-top: 30px;
+  padding-top: 20px;
+  line-height: 22px;
+}
+
+
+@media (max-width: 767px) {
+  .receipt-content .invoice-wrapper .payment-details .text-right {
+  text-align: left;
+  margin-top: 20px; }
+}
+.receipt-content .invoice-wrapper .line-items {
+  margin-top: 40px;
+}
+.receipt-content .invoice-wrapper .line-items .headers {
+  color: #A9B0BB;
+  font-size: 13px;
+  letter-spacing: .3px;
+  border-bottom: 2px solid #EBECEE;
+  padding-bottom: 4px;
+}
+.receipt-content .invoice-wrapper .line-items .items {
+  margin-top: 8px;
+  border-bottom: 2px solid #EBECEE;
+  padding-bottom: 8px;
+}
+.receipt-content .invoice-wrapper .line-items .items .item {
+  padding: 10px 0;
+  color: #696969;
+  font-size: 15px;
+}
+@media (max-width: 767px) {
+  .receipt-content .invoice-wrapper .line-items .items .item {
+  font-size: 13px; }
+}
+.receipt-content .invoice-wrapper .line-items .items .item .amount {
+  letter-spacing: 0.1px;
+  color: #84868A;
+  font-size: 16px;
+ }
+@media (max-width: 767px) {
+  .receipt-content .invoice-wrapper .line-items .items .item .amount {
+  font-size: 13px; }
+}
+
+.receipt-content .invoice-wrapper .line-items .total {
+  margin-top: 30px;
+}
+
+.receipt-content .invoice-wrapper .line-items .total .extra-notes {
+  float: left;
+  width: 40%;
+  text-align: left;
+  font-size: 13px;
+  color: #7A7A7A;
+  line-height: 20px;
+}
+
+@media (max-width: 767px) {
+  .receipt-content .invoice-wrapper .line-items .total .extra-notes {
+  width: 100%;
+  margin-bottom: 30px;
+  float: none; }
+}
+
+.receipt-content .invoice-wrapper .line-items .total .extra-notes strong {
+  display: block;
+  margin-bottom: 5px;
+  color: #454545;
+}
+
+.receipt-content .invoice-wrapper .line-items .total .field {
+  margin-bottom: 7px;
+  font-size: 14px;
+  color: #555;
+}
+
+.receipt-content .invoice-wrapper .line-items .total .field.grand-total {
+  margin-top: 10px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.receipt-content .invoice-wrapper .line-items .total .field.grand-total span {
+  color: #20A720;
+  font-size: 16px;
+}
+
+.receipt-content .invoice-wrapper .line-items .total .field span {
+  display: inline-block;
+  margin-left: 20px;
+  min-width: 85px;
+  color: #84868A;
+  font-size: 15px;
+}
+
+.receipt-content .invoice-wrapper .line-items .print {
+  margin-top: 50px;
+  text-align: center;
+}
+
+
+
+.receipt-content .invoice-wrapper .line-items .print a i {
+  margin-right: 3px;
+  font-size: 14px;
+}
+
+.receipt-content .footer {
+  margin-top: 40px;
+  margin-bottom: 110px;
+  text-align: center;
+  font-size: 12px;
+  color: #969CAD;
+}
+
+
+    {#    payments#}
+
+
+
+
+
+
+
+
+        body{margin-top:20px;
+background:#eee;
+}
+
+/* WRAPPERS */
+#wrapper {
+  width: 100%;
+  overflow-x: hidden;
+}
+.wrapper {
+  padding: 0 20px;
+}
+.wrapper-content {
+  padding: 20px 10px 40px;
+}
+#page-wrapper {
+  padding: 0 15px;
+  min-height: 568px;
+  position: relative !important;
+}
+@media (min-width: 768px) {
+  #page-wrapper {
+    position: inherit;
+    margin: 0 0 0 240px;
+    min-height: 2002px;
+  }
+}
+
+/* Payments */
+.payment-card {
+  background: #ffffff;
+  padding: 20px;
+  margin-bottom: 25px;
+  border: 1px solid #e7eaec;
+}
+.payment-icon-big {
+  font-size: 60px;
+  color: #d1dade;
+}
+.payments-method.panel-group .panel + .panel {
+  margin-top: -1px;
+}
+.payments-method .panel-heading {
+  padding: 15px;
+}
+.payments-method .panel {
+  border-radius: 0;
+}
+.payments-method .panel-heading h5 {
+  margin-bottom: 5px;
+}
+.payments-method .panel-heading i {
+  font-size: 26px;
+}
+
+.payment-icon-big {
+    font-size: 60px !important;
+    color: #d1dade;
+}
+
+.form-control,
+.single-line {
+  background-color: #FFFFFF;
+  background-image: none;
+  border: 1px solid #e5e6e7;
+  border-radius: 1px;
+  color: inherit;
+  display: block;
+  padding: 6px 12px;
+  transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+  width: 100%;
+  font-size: 14px;
+}
+.text-navy {
+    color: #1ab394;
+}
+.text-success {
+    color: #1c84c6;
+}
+.text-warning {
+    color: #f8ac59;
+}
+.ibox {
+  clear: both;
+  margin-bottom: 25px;
+  margin-top: 0;
+  padding: 0;
+}
+.ibox.collapsed .ibox-content {
+  display: none;
+}
+.ibox.collapsed .fa.fa-chevron-up:before {
+  content: "\f078";
+}
+.ibox.collapsed .fa.fa-chevron-down:before {
+  content: "\f077";
+}
+.ibox:after,
+.ibox:before {
+  display: table;
+}
+.ibox-title {
+  -moz-border-bottom-colors: none;
+  -moz-border-left-colors: none;
+  -moz-border-right-colors: none;
+  -moz-border-top-colors: none;
+  background-color: #ffffff;
+  border-color: #e7eaec;
+  border-image: none;
+  border-style: solid solid none;
+  border-width: 3px 0 0;
+  color: inherit;
+  margin-bottom: 0;
+  padding: 14px 15px 7px;
+  min-height: 48px;
+}
+.ibox-content {
+  background-color: #ffffff;
+  color: inherit;
+  padding: 15px 20px 20px 20px;
+  border-color: #e7eaec;
+  border-image: none;
+  border-style: solid solid none;
+  border-width: 1px 0;
+}
+.ibox-footer {
+  color: inherit;
+  border-top: 1px solid #e7eaec;
+  font-size: 90%;
+  background: #ffffff;
+  padding: 10px 15px;
+}
+.text-danger {
+    color: #ed5565;
+}
+
+
 
     </style>
 </head>
@@ -91,7 +451,7 @@
       <!-- Breadcrumb -->
       <nav aria-label="breadcrumb" class="main-breadcrumb">
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item"><a href="{% url   'core:homepage' %}">Home</a></li>
           <li class="breadcrumb-item active" aria-current="page">Pricing</li>
            <li class="breadcrumb-item active">
                              {% if messages %}
