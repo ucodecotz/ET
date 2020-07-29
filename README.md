@@ -19,10 +19,10 @@
   ====Configure th virtual environments====
     1: set venv(virtual enviroments
        --by typying
-          >python3 - venv env
+        > python3 - venv env
     2: then activate venv
          --by tying
-          >source env/bin/bin/activate
+        > source env/bin/bin/activate
           
   ====Set the database and Make maigrations====
       1: set databse and you ok with database then type
@@ -33,6 +33,9 @@
         by typing 
         
         > python3 manahe.py runserver
+        
+        
+        =========Developer Nichoraus ============ 
       
           
           
