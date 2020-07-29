@@ -6,8 +6,71 @@ from django.contrib.auth.decorators import login_required
 from django.http import Http404
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import ListView, DetailView, View
+from rest_framework import viewsets, request
+from django.contrib.auth.models import User
+from .serializers import *
 from .models import *
 from .forms import *
+
+"""
+Here are project endpoint
+"""
+
+
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+
+class UserProfileViewSet(viewsets.ModelViewSet):
+    queryset = UserProfile.objects.all()
+    serializer_class = UserProfileSerializer
+
+
+class Sub_priceViewSet(viewsets.ModelViewSet):
+    queryset = SubscriptionPrice.objects.all()
+    serializer_class = Sub_priceSerializer
+
+
+class SubscriptionTypeViewSet(viewsets.ModelViewSet):
+    queryset = SubscriptionType.objects.all()
+    serializer_class = SubscriptionTypeSerializer
+
+
+class UserSubscriptionsViewSet(viewsets.ModelViewSet):
+    queryset = UserSubscriptions.objects.all()
+    serializer_class = SubscriptionTypeSerializer
+
+
+class InvoiceViewSet(viewsets.ModelViewSet):
+    queryset = Invoice.objects.all()
+    serializer_class = InvoiceSerializer
+
+
+class ServiceProviderViewSet(viewsets.ModelViewSet):
+    queryset = ServiceProvider.objects.all()
+    serializer_class = ServiceProviderSerializer
+
+
+class PaymentsViewSet(viewsets.ModelViewSet):
+    queryset = Payments.objects.all()
+    serializer_class = PaymentsSerializer
+
+
+class CombinationViewSet(viewsets.ModelViewSet):
+    queryset = Combinations.objects.all()
+    serializer_class = PaymentsSerializer
+
+
+class SubjectViewSet(viewsets.ModelViewSet):
+    queryset = Subject.objects.all()
+    serializer_class = PaymentsSerializer
+
+
+
+"""
+Normal function for the project
+"""
 
 
 class home(ListView):
@@ -188,7 +251,7 @@ class PaymentForm(View):
             payments.save()
 
             sub_user = invoices.subscriptions.all()
-            sub_user.update(is_paid=True, is_active=True,payment=payments)
+            sub_user.update(is_paid=True, is_active=True, payment=payments)
             for sub in sub_user:
                 sub.save()
 

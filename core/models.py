@@ -78,7 +78,6 @@ class Subject(models.Model):
 
 
 class SubscriptionPrice(models.Model):
-    sub_price_code = models.CharField(max_length=200, null=True, blank=True)
     sub_price_amount = models.DecimalField(max_digits=13, decimal_places=2, null=True, blank=True)
 
     class Meta:

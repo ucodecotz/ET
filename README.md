@@ -1,5 +1,5 @@
 # ET
- ====Technolgy used===== 
+====Technolgy used===== 
    python 3.6
    Django==3.0.8
    Ubuntu OS
