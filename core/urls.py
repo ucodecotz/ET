@@ -13,7 +13,7 @@ router.register(r'service_provider_api', ServiceProviderViewSet)
 router.register(r'payments_api', PaymentsViewSet)
 router.register(r'combination_api', CombinationViewSet)
 router.register(r'subject_api', SubjectViewSet)
-router.register(r'subscription_price_api',Sub_priceViewSet)
+router.register(r'subscription_price_api', Sub_priceViewSet)
 
 app_name = 'core'
 urlpatterns = [
@@ -29,7 +29,5 @@ urlpatterns = [
     path('invoce/', views.InvoiceView.as_view(), name='invoice'),
     path('select_provider/<pk>', views.Select_provider, name='select_provider'),
     path('paymentForm/', views.PaymentForm.as_view(), name='paymentForm'),
-
-
 
 ]

@@ -61,3 +61,5 @@ class Sub_priceSerializer(serializers.ModelSerializer):
     class Meta:
         model = SubscriptionPrice
         fields = '__all__'
+
+

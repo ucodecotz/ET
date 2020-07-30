@@ -12,6 +12,10 @@ from .serializers import *
 from .models import *
 from .forms import *
 
+
+# generate token
+
+
 """
 Here are project endpoint
 """
@@ -67,10 +71,15 @@ class SubjectViewSet(viewsets.ModelViewSet):
     serializer_class = PaymentsSerializer
 
 
-
 """
 Normal function for the project
 """
+
+
+def get_object(self):
+    obj = get_object_or_404(self.get_queryset())
+    self.check_object_permissions(self.request, obj)
+    return obj
 
 
 class home(ListView):
