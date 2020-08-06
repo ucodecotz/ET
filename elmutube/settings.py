@@ -125,16 +125,17 @@ REST_FRAMEWORK = {
     # or allow read-only access for unauthenticated users.
     'DEFAULT_PERMISSION_CLASSES': [
         # when i want to authenticate the user with the username and password
-        # 'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
-        'rest_framework.permissions.IsAuthenticated',
 
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
+        # 'rest_framework.permissions.IsAuthenticated',
         # 'rest_framework.authentication.TokenAuthentication',
     ],
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        # this allow the user with web token
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
-        'rest_framework.authentication.SessionAuthentication',
-    )
+    # TODO uncomment if you want use Token to access the API
+    # 'DEFAULT_AUTHENTICATION_CLASSES': (
+    #     # this allow the user with web token
+    #     'rest_framework_simplejwt.authentication.JWTAuthentication',
+    #     'rest_framework.authentication.SessionAuthentication',
+    # )
 }
 
 # await fetch(API_URL, {

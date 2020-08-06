@@ -164,6 +164,33 @@ class UserSubscriptions(models.Model):
         self.is_paid = True
         return self.is_paid
 
+    def get_is_expired(self):
+        if self.after_update_duration == 'M' and self.payment is not None:
+            sub_period = self.start_date + timedelta(days=_sub_unit_days['M'])
+            if self.end_date > sub_period:
+                self.expired = True
+            else:
+                self.expired = False
+        elif self.after_update_duration == 'D' and self.payment is not None:
+            sub_period = self.start_date + timedelta(days=_sub_unit_days['D'])
+            if self.end_date > sub_period:
+                self.expired = True
+            else:
+                self.expired = False
+        elif self.after_update_duration == 'W' and self.payment is not None:
+            sub_period = self.start_date + timedelta(days=_sub_unit_days['W'])
+            if self.end_date > sub_period:
+                self.expired = True
+            else:
+                self.expired = False
+        elif self.after_update_duration == 'Y' and self.payment is not None:
+            sub_period = self.start_date + timedelta(days=_sub_unit_days['Y'])
+            if self.end_date > sub_period:
+                self.expired = True
+            else:
+                self.expired = False
+        return self.expired
+
     def save(self, *args, **kwargs):
         charge_per_day = float(self.subscription_type.sub_price.sub_price_amount)
 
@@ -181,23 +208,17 @@ class UserSubscriptions(models.Model):
 
         elif self.after_update_duration == 'Y':
             self.after_update_price = charge_per_day * _sub_unit_days['Y']
+
             super(UserSubscriptions, self).save(*args, **kwargs)
         if self.payment is not None:
             self.is_active = self.set_is_active()
             self.payment_status = self.set_is_paid()
+            self.expired = self.get_is_expired()
             super(UserSubscriptions, self).save(*args, **kwargs)
-
-    # def get_final_price(self, *args, **kwargs):
-    #     #  we can  a certain amount pay and
-    #     #  sometimes try to times with the number of day the user has subscribed
-    #     # TODO something to with final price hare afer subscripyion
-    #     #  for now i can do this. not real what i wanted
-    #     self.after_update_price = self.get_price_before_subscriptions()
-    #     super(UserSubscriptions, self).get_final_price(**kwargs, *args)
 
     # TODO: add  expiration's function here
     # def subscription_expire(self):
-    #     if self.end_date
+    #     if self.end_date-
 
     def __str__(self):
         return str(f"{self.user_id}'s subscription started on: {self.start_date}  and ends on{self.end_date} ")
@@ -247,7 +268,7 @@ class Invoice(models.Model):
     is_paid = models.BooleanField(null=True, blank=True, default=False)
 
     created_on = models.DateTimeField(default=timezone.now)
-    invoice_status = models.CharField( max_length=200,choices=INVOICE_STATUS, null=True)
+    invoice_status = models.CharField(max_length=200, choices=INVOICE_STATUS, null=True)
 
     # TODO: we need to get total amount for all subcribed server
     # TODO: depending to the customer
