@@ -242,11 +242,6 @@ class PaymentForm(View):
             # TODO  payment getaway api
             '''
 
-            # subscriptions = UserSubscriptions.objects.get(
-            #     user_id=self.request.user,
-            #     is_active=False,
-            #
-            # ).first()
             payments = Payments()
             payments.amount = invoices.get_total()
             payments.user = self.request.user
@@ -256,7 +251,7 @@ class PaymentForm(View):
             
             """
             payments.reference_id_from_ISP = create_ref_code()
-            payments.success_type = 'Payments descriptions heare'
+            payments.success_type = 'Payments descriptions here'
             payments.save()
 
             sub_user = invoices.subscriptions.all()

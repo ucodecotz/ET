@@ -74,7 +74,7 @@ class Subject(models.Model):
 
 
 # TODO: i dont suggest to have this table :
-# TODO: coz we need to assign thr price to subscrtion type itself to remove redudant of tables
+# TODO: coz we need to assign the price to subscription type itself to remove redudant of tables
 
 
 class SubscriptionPrice(models.Model):
@@ -164,31 +164,11 @@ class UserSubscriptions(models.Model):
         self.is_paid = True
         return self.is_paid
 
+    # TODO: add  expiration's function here
+    # After the subscription end_date we need to assign as subscription expired
     def get_is_expired(self):
-        if self.after_update_duration == 'M' and self.payment is not None:
-            sub_period = self.start_date + timedelta(days=_sub_unit_days['M'])
-            if self.end_date > sub_period:
-                self.expired = True
-            else:
-                self.expired = False
-        elif self.after_update_duration == 'D' and self.payment is not None:
-            sub_period = self.start_date + timedelta(days=_sub_unit_days['D'])
-            if self.end_date > sub_period:
-                self.expired = True
-            else:
-                self.expired = False
-        elif self.after_update_duration == 'W' and self.payment is not None:
-            sub_period = self.start_date + timedelta(days=_sub_unit_days['W'])
-            if self.end_date > sub_period:
-                self.expired = True
-            else:
-                self.expired = False
-        elif self.after_update_duration == 'Y' and self.payment is not None:
-            sub_period = self.start_date + timedelta(days=_sub_unit_days['Y'])
-            if self.end_date > sub_period:
-                self.expired = True
-            else:
-                self.expired = False
+
+        self.expired = True
         return self.expired
 
     def save(self, *args, **kwargs):
@@ -213,19 +193,15 @@ class UserSubscriptions(models.Model):
         if self.payment is not None:
             self.is_active = self.set_is_active()
             self.payment_status = self.set_is_paid()
-            self.expired = self.get_is_expired()
             super(UserSubscriptions, self).save(*args, **kwargs)
 
-    # TODO: add  expiration's function here
-    # def subscription_expire(self):
-    #     if self.end_date-
+        # show that the subscription is  now expired or not
+        if self.end_date == datetime.now():
+            self.expired = False
+            super(UserSubscriptions, self).save(*args, **kwargs)
 
     def __str__(self):
         return str(f"{self.user_id}'s subscription started on: {self.start_date}  and ends on{self.end_date} ")
-
-    # TODO: add function to manage sub status after payments
-
-    # TODO: we need function for handling thr total amount for subscriptions
 
 
 class ServiceProvider(models.Model):
@@ -243,8 +219,8 @@ class ServiceProvider(models.Model):
         return reverse('core:select_provider', kwargs={'pk': self.pk})
 
 
-def get_code_generator(size=6, chars=string.ascii_uppercase + string.digits):
-    return ''.join(random.choice(chars) for _ in range(size))
+# def get_code_generator(size=6, chars=string.ascii_uppercase + string.digits):
+#     return ''.join(random.choice(chars) for _ in range(size))
 
 
 def create_ref_code():
@@ -301,11 +277,11 @@ class Invoice(models.Model):
 
 
 class Payments(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    amount = models.FloatField(null=True, blank=True)
-    timestamp = models.DateTimeField(default=timezone.now)
-    reference_id_from_ISP = models.CharField(max_length=50, null=True, blank=True)
-    success_type = models.CharField(max_length=50, null=True, blank=True)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, editable=False)
+    amount = models.FloatField(null=True, blank=True, editable=False)
+    timestamp = models.DateTimeField(default=timezone.now, editable=False)
+    reference_id_from_ISP = models.CharField(max_length=50, null=True, blank=True, editable=False)
+    success_type = models.CharField(max_length=50, null=True, blank=True, editable=False)
 
     class Meta:
         verbose_name_plural = "Payments"
@@ -313,6 +289,7 @@ class Payments(models.Model):
     def __str__(self):
         return self.reference_id_from_ISP
 
+# TODO i dont think is a good idea to have the table here
 # class Payment_response(models.Model):
 #     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 #     invoice_id = models.ForeignKey(Invoice, on_delete=models.CASCADE, null=True, blank=True)
